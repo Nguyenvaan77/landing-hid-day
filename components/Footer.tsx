@@ -61,7 +61,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Product Links */}
+            {/* Product Links
             <div className="space-y-6">
               <h4 className="text-lg font-semibold">Sản phẩm</h4>
               <ul className="space-y-3">
@@ -73,9 +73,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
 
-            {/* Company Links */}
+            {/* Company Links
             <div className="space-y-6">
               <h4 className="text-lg font-semibold">Công ty</h4>
               <ul className="space-y-3">
@@ -87,9 +87,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
 
-            {/* Support Links */}
+            {/* Support Links
             <div className="space-y-6">
               <h4 className="text-lg font-semibold">Hỗ trợ</h4>
               <ul className="space-y-3">
@@ -101,7 +101,8 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
+            
           </div>
 
           {/* Bottom */}

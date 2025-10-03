@@ -5,16 +5,16 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 
 const missionPoints = [
   {
+    icon: Target,
+    text: "Bạn giúp người khác tránh rủi ro",
+  },
+  {
     icon: Heart,
     text: "Bạn ghi nhận lương y thật sự giỏi",
   },
   {
     icon: Lightbulb,
     text: "Bạn góp phần xây dựng nền YHCT rõ nguồn – sáng đạo – nhân văn",
-  },
-  {
-    icon: Target,
-    text: "Bạn giúp người khác tránh rủi ro",
   },
 ]
 
@@ -65,33 +65,6 @@ export default function MissionSection() {
                       <p className="text-gray-700 font-medium leading-relaxed text-sm">{point.text}</p>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-            <div className="mt-8 pt-6 border-t border-herb-green-200/50">
-              <div className="text-center space-y-4">
-                <h4 className="text-lg font-bold text-gray-900">Sẵn sàng tham gia cộng đồng?</h4>
-                <p className="text-gray-600 max-w-2xl mx-auto">
-                  Hãy cùng chúng tôi xây dựng một cộng đồng Y học cổ truyền minh bạch và hiệu quả
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61575814304088&locale=vi_VN"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-herb-green-500 to-herb-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-herb-green-600 hover:to-herb-green-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                  >
-                    <span>🤝</span>
-                    <span>Tham gia cộng đồng LangConnect</span>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61575814304088&locale=vi_VN"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-2 border-herb-green-500 text-herb-green-600 px-6 py-3 rounded-xl font-semibold hover:bg-herb-green-50 transition-all duration-300"
-                  >
-                    Tìm hiểu thêm
-                  </a>
                 </div>
               </div>
             </div>

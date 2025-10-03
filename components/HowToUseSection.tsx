@@ -8,7 +8,7 @@ const steps = [
     number: "01",
     title: "Tạo tài khoản miễn phí",
     description: "Đăng ký tài khoản LangConnect chỉ trong vài bước đơn giản",
-    image: "/img/dangki.png",
+    image: "/img/datlich.png",
   },
   {
     number: "02",
@@ -26,7 +26,7 @@ const steps = [
     number: "04",
     title: "Đánh giá sau kết nối",
     description: "Chia sẻ trải nghiệm để giúp cộng đồng và cải thiện dịch vụ",
-    image: "/img/danhgiathaylang.png",
+    image: "/img/thuvien.png",
   },
 ]
 

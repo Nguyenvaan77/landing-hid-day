@@ -30,7 +30,9 @@ export default function CTASection() {
           <div className="grid md:grid-cols-2 gap-6 mb-10">
             {/* Website Card */}
             <a
-              href="#"
+              href="https://langconnect.vn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl p-6 border-2 border-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="flex items-center justify-center space-x-4">
@@ -46,7 +48,9 @@ export default function CTASection() {
 
             {/* Facebook Card */}
             <a
-              href="#"
+              href="https://www.facebook.com/profile.php?id=61578673978954"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl p-6 border-2 border-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="flex items-center justify-center space-x-4">
@@ -67,20 +71,25 @@ export default function CTASection() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex items-center justify-center space-x-3 text-white">
                 <Mail className="w-5 h-5" />
-                <span>contact@example.com</span>
+                <span>langconnect2025@gmail.com</span>
               </div>
               <div className="flex items-center justify-center space-x-3 text-white">
                 <Phone className="w-5 h-5" />
-                <span>+84 123 456 789</span>
+                <span>0968912734 - Phạm Thị Tuyết</span>
               </div>
             </div>
           </div>
 
           {/* Call to Action Button */}
           <div className="mt-8">
-            <button className="bg-white text-herb-green-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+            <a
+              href="https://www.facebook.com/profile.php?id=61578673978954"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-herb-green-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            >
               🌿 Tìm hiểu thêm ngay
-            </button>
+            </a>
           </div>
         </div>
       </div>

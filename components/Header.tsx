@@ -12,10 +12,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-herb-green-500 rounded-lg flex items-center justify-center">
-              <span className="text-white text-lg">🍵</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <span className="text-white text-lg">
+                {/* 🍵 */}
+               
+                </span> <img src="/img/logo.png" alt="asdas" />
             </div>
-            <span className="text-xl font-bold text-herb-green-800">Trà Dược Liệu</span>
+            <span className="text-xl font-bold text-herb-green-800">LangConnect</span>
           </div>
 
           {/* Desktop Navigation */}

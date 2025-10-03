@@ -2,11 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Mail, Phone, MapPin, Send } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/useScrollAnimation"
-import emailjs from "@emailjs/browser"
-import { CSVLogger, type ContactData } from "@/lib/csv-logger"
-import { IPService } from "@/lib/ip-service"
 
 export default function FinalCTASection() {
   const { elementRef, isVisible } = useScrollAnimation()
@@ -18,126 +15,10 @@ export default function FinalCTASection() {
     message: "",
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("idle")
-
-    // Tạo timestamp unique
-    const timestamp = new Date().toISOString()
-
-    // Lấy thông tin user
-    const userAgent = navigator.userAgent
-    const userIP = await IPService.getUserIP()
-
-    // Tạo contact data để lưu CSV
-    const contactData: ContactData = {
-      timestamp,
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || "Không cung cấp",
-      message: formData.message,
-      emailStatus: "pending",
-      userAgent,
-      ipAddress: userIP,
-    }
-
-    // Lưu vào localStorage ngay lập tức (backup đầu tiên)
-    CSVLogger.saveContact(contactData)
-
-    // Gửi dữ liệu lên API để lưu trữ server-side
-    try {
-      await fetch("/api/contacts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(contactData),
-      })
-    } catch (error) {
-      console.warn("Failed to save to server, but localStorage backup exists:", error)
-    }
-
-    try {
-      // EmailJS Configuration - THAY ĐỔI CÁC GIÁ TRỊ NÀY
-      const serviceId = "service_langconnect" // Thay bằng Service ID thực
-      const templateId = "template_contact" // Thay bằng Template ID thực
-      const publicKey = "YOUR_PUBLIC_KEY" // Thay bằng Public Key thực
-
-      // Gửi email qua EmailJS
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone || "Không cung cấp",
-          message: formData.message,
-          to_email: "langconnect2025@gmail.com",
-          sent_at: new Date().toLocaleString("vi-VN"),
-          website: "LangConnect Landing Page",
-        },
-        publicKey,
-      )
-
-      // Cập nhật trạng thái thành công
-      CSVLogger.updateEmailStatus(timestamp, "success")
-
-      // Cập nhật trạng thái trên server
-      try {
-        await fetch("/api/contacts/update-status", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            timestamp,
-            status: "success",
-          }),
-        })
-      } catch (error) {
-        console.warn("Failed to update server status:", error)
-      }
-
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", phone: "", message: "" })
-
-      // Tự động ẩn thông báo sau 5 giây
-      setTimeout(() => setSubmitStatus("idle"), 5000)
-    } catch (error: any) {
-      console.error("Error sending email:", error)
-
-      // Cập nhật trạng thái lỗi với chi tiết
-      const errorMessage = error?.text || error?.message || "Unknown error"
-      CSVLogger.updateEmailStatus(timestamp, "failed", errorMessage)
-
-      // Cập nhật trạng thái lỗi trên server
-      try {
-        await fetch("/api/contacts/update-status", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            timestamp,
-            status: "failed",
-            errorMessage,
-          }),
-        })
-      } catch (error) {
-        console.warn("Failed to update server error status:", error)
-      }
-
-      setSubmitStatus("error")
-
-      // Tự động ẩn thông báo lỗi sau 5 giây
-      setTimeout(() => setSubmitStatus("idle"), 5000)
-    } finally {
-      setIsSubmitting(false)
-    }
+    alert("Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.")
+    setFormData({ name: "", email: "", phone: "", message: "" })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -174,30 +55,15 @@ export default function FinalCTASection() {
               {/* Right - Action Buttons */}
               <div className="flex flex-col gap-3 items-start">
                 <div className="flex flex-col gap-3 w-72">
-                  <a
-                    href="https://lang-connect-tpye.vercel.app/thay-lang"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white text-herb-green-600 hover:bg-gray-100 px-6 py-3 text-base font-semibold rounded-lg transition-colors w-full text-left block"
-                  >
+                  <button className="bg-white text-herb-green-600 hover:bg-gray-100 px-6 py-3 text-base font-semibold rounded-lg transition-colors w-full text-left">
                     👉 Đặt lịch ngay
-                  </a>
-                  <a
-                    href="https://lang-connect-tpye.vercel.app/kien-thuc"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-2 border-white text-white hover:bg-white hover:text-herb-green-600 px-6 py-3 text-base font-semibold bg-transparent rounded-lg transition-colors w-full text-left block"
-                  >
+                  </button>
+                  <button className="border-2 border-white text-white hover:bg-white hover:text-herb-green-600 px-6 py-3 text-base font-semibold bg-transparent rounded-lg transition-colors w-full text-left">
                     👉 Thư viện YHCT
-                  </a>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61575814304088&locale=vi_VN"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-2 border-white text-white hover:bg-white hover:text-herb-green-600 px-6 py-3 text-base font-semibold bg-transparent rounded-lg transition-colors w-full text-left block whitespace-nowrap"
-                  >
+                  </button>
+                  <button className="border-2 border-white text-white hover:bg-white hover:text-herb-green-600 px-6 py-3 text-base font-semibold bg-transparent rounded-lg transition-colors w-full text-left whitespace-nowrap">
                     🤝 Cộng đồng LangConnect
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -229,7 +95,7 @@ export default function FinalCTASection() {
                     </div>
                     <div>
                       <h5 className="font-semibold text-white">Email</h5>
-                      <p className="text-herb-green-100">langconnect2025@gmail.com</p>
+                      <p className="text-herb-green-100">contact@langconnect.vn</p>
                     </div>
                   </div>
 
@@ -239,7 +105,7 @@ export default function FinalCTASection() {
                     </div>
                     <div>
                       <h5 className="font-semibold text-white">Điện thoại</h5>
-                      <p className="text-herb-green-100">0968912734 - Phạm Thị Tuyết</p>
+                      <p className="text-herb-green-100">+84 123 456 789</p>
                     </div>
                   </div>
 
@@ -249,7 +115,7 @@ export default function FinalCTASection() {
                     </div>
                     <div>
                       <h5 className="font-semibold text-white">Địa chỉ</h5>
-                      <p className="text-herb-green-100">13-15 Lê Thánh Tông, phường Cửa Nam, thành phố Hà Nội</p>
+                      <p className="text-herb-green-100">Đại học Dược Hà Nội, Việt Nam</p>
                     </div>
                   </div>
                 </div>
@@ -257,29 +123,6 @@ export default function FinalCTASection() {
 
               {/* Contact Form */}
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div className="mb-4 p-3 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-green-400" />
-                    <span className="text-green-100 text-sm">
-                      Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong vòng 24 giờ.
-                      <br />
-                      <small>✅ Dữ liệu đã được lưu trữ an toàn.</small>
-                    </span>
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center space-x-2">
-                    <AlertCircle className="w-5 h-5 text-red-400" />
-                    <span className="text-red-100 text-sm">
-                      Email gửi thất bại, nhưng thông tin của bạn đã được lưu trữ an toàn.
-                      <br />
-                      <small>📞 Vui lòng liên hệ trực tiếp: 0968912734</small>
-                    </span>
-                  </div>
-                )}
-
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-3">
                     <div>
@@ -293,8 +136,7 @@ export default function FinalCTASection() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        disabled={isSubmitting}
-                        className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm disabled:opacity-50"
+                        className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm"
                         placeholder="Nhập họ và tên"
                       />
                     </div>
@@ -308,8 +150,7 @@ export default function FinalCTASection() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        disabled={isSubmitting}
-                        className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm disabled:opacity-50"
+                        className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm"
                         placeholder="Nhập số điện thoại"
                       />
                     </div>
@@ -326,8 +167,7 @@ export default function FinalCTASection() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      disabled={isSubmitting}
-                      className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm disabled:opacity-50"
+                      className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors text-sm"
                       placeholder="Nhập địa chỉ email"
                     />
                   </div>
@@ -343,33 +183,18 @@ export default function FinalCTASection() {
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      disabled={isSubmitting}
-                      className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors resize-none text-sm disabled:opacity-50"
+                      className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:ring-2 focus:ring-white focus:border-white transition-colors resize-none text-sm"
                       placeholder="Nhập nội dung tin nhắn..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-white text-herb-green-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2 group text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-white text-herb-green-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2 group text-sm"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-herb-green-600 border-t-transparent rounded-full animate-spin"></div>
-                        <span>Đang gửi & lưu trữ...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        <span>Gửi liên hệ</span>
-                      </>
-                    )}
+                    <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span>Gửi liên hệ</span>
                   </button>
-
-                  <p className="text-xs text-herb-green-200 text-center">
-                    🔒 Thông tin của bạn được lưu trữ an toàn và bảo mật
-                  </p>
                 </form>
               </div>
             </div>

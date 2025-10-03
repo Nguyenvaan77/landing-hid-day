@@ -6,8 +6,8 @@ export default function HeroSection() {
     <section className="relative py-12 lg:py-20 overflow-hidden bg-gradient-to-br from-herb-green-50 via-herb-green-100 to-herb-green-200">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image src="/img/memcab/nenhup.png" alt="Background" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-br from-herb-green-50/80 via-herb-green-100/10 to-herb-green-200/20"></div>
+        <Image src="/img/memcab/background.png" alt="Background" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-gradient-to-br from-herb-green-50/10 via-herb-green-100/10 to-herb-green-200/10"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,10 +34,14 @@ export default function HeroSection() {
 
             {/* CTA Button */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-gradient-to-r from-herb-green-500 to-herb-green-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:from-herb-green-600 hover:to-herb-green-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+              <a
+                href="https://langconnect.vn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-gradient-to-r from-herb-green-500 to-herb-green-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:from-herb-green-600 hover:to-herb-green-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
                 <span>🌿 Khám phá ngay</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
           </div>
 

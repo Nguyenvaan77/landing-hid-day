@@ -33,7 +33,7 @@ export default function HeroSection() {
             </div>
 
             {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="https://langconnect.vn"
                 target="_blank"
@@ -42,7 +42,7 @@ export default function HeroSection() {
                 <span>🌿 Khám phá ngay</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Image - Animated */}

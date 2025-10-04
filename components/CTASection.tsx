@@ -48,7 +48,7 @@ export default function CTASection() {
 
             {/* Facebook Card */}
             <a
-              href="https://www.facebook.com/profile.php?id=61578673978954"
+              href="https://www.facebook.com/profile.php?id=61575814304088"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl p-6 border-2 border-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"

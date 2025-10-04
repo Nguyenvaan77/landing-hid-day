@@ -31,8 +31,10 @@ export default function Footer() {
             {/* Brand */}
             <div className="lg:col-span-1 space-y-6">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-herb-green-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-lg">🏥</span>
+                <div className="w-8 h-8  rounded-lg flex items-center justify-center">
+                  <span className="text-white text-lg">
+                    {/* 🏥 */}
+                    </span> <img src="/img/logo.png" alt="" />
                 </div>
                 <span className="text-xl font-bold">LangConnect</span>
               </div>
